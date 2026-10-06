@@ -1,3 +1,8 @@
+> [!NOTE]
+> **This is a modified fork, not a pure clone of [finos/legend-shared](https://github.com/finos/legend-shared).** It is used for a Devin demo.
+> One change sits on top of upstream `master`:
+> - **Added [`.github/workflows/fork-ci.yml`](.github/workflows/fork-ci.yml)**, a build + test workflow (JDK 17 and 25). Upstream's `build.yml` only runs inside the `finos` org, so without it PRs on this fork would get no CI signal. No upstream files were changed apart from this notice.
+
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://finosfoundation.atlassian.net/wiki/display/FINOS/Incubating)
 [![Maven Central](https://img.shields.io/maven-central/v/org.finos.legend.shared/legend-shared-server.svg)](https://central.sonatype.com/namespace/org.finos.legend.shared)
 ![Build CI](https://github.com/finos/legend-shared/workflows/Build%20CI/badge.svg)
