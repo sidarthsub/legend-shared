@@ -1,8 +1,8 @@
 package org.finos.legend.server.pac4j;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.finos.legend.server.pac4j.LegendRequestHandler.REDIRECT_PROTO_ATTRIBUTE;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -73,14 +73,14 @@ public class LegendSecurityLogicTest
 
     AutoCloseable closeableMocks;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         closeableMocks = MockitoAnnotations.openMocks(this);
         legendSecurityLogic = spy(new TestableLegendSecurityLogic<>());
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         closeableMocks.close();
     }

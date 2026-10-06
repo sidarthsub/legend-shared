@@ -20,9 +20,9 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.map.IMap;
 import org.finos.legend.server.pac4j.SessionStoreTestUtil;
 import org.finos.legend.server.pac4j.sessionutil.UuidUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.context.JEEContext;
 import org.pac4j.core.context.session.JEESessionStore;
 import org.pac4j.jax.rs.pac4j.JaxRsContext;
@@ -40,11 +40,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HazelcastSessionStoreTest
 {
@@ -56,14 +56,14 @@ public class HazelcastSessionStoreTest
 
     private HazelcastSessionStore store;
 
-    @Before
+    @BeforeEach
     public void before()
     {
         store = new HazelcastSessionStore(HAZELCAST_CONFIG_FILE_PATH, ImmutableMap.of(
                 JEEContext.class, new JEESessionStore(), JaxRsContext.class, new ServletSessionStore()), SSO_COOKIE_NAME);
     }
 
-    @After
+    @AfterEach
     public void after()
     {
         Hazelcast.shutdownAll();
@@ -112,9 +112,9 @@ public class HazelcastSessionStoreTest
 
         Optional<Object> result = store.get(nodeBContext, "userProfiles");
 
-        assertFalse("get() should return empty for the evicted key", result.isPresent());
-        assertTrue("get() must re-seed the Hazelcast entry after eviction", imap.containsKey(sessionId));
-        assertEquals("re-seeded entry must be empty", 0, imap.get(sessionId).size());
+        assertFalse(result.isPresent(), "get() should return empty for the evicted key");
+        assertTrue(imap.containsKey(sessionId), "get() must re-seed the Hazelcast entry after eviction");
+        assertEquals(0, imap.get(sessionId).size(), "re-seeded entry must be empty");
     }
 
     @Test
@@ -137,7 +137,7 @@ public class HazelcastSessionStoreTest
         JEEContext nodeBContext = new JEEContext(nodeBRequest, nodeBResponse);
         store.set(nodeBContext, "csrfToken", "node-b-token");
 
-        assertTrue("set() must upsert the missing Hazelcast entry", imap.containsKey(sessionId));
+        assertTrue(imap.containsKey(sessionId), "set() must upsert the missing Hazelcast entry");
         assertEquals("node-b-token", imap.get(sessionId).get("csrfToken"));
 
         MockHttpServletRequest nodeCRequest = new MockHttpServletRequest();
