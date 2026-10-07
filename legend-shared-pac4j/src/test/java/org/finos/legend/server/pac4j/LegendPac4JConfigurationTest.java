@@ -18,8 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.configuration.ConfigurationException;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import java.io.IOException;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class LegendPac4JConfigurationTest
 {
@@ -34,9 +34,9 @@ public class LegendPac4JConfigurationTest
     config.loadDefaults(new ResourceConfigurationSourceProvider(), new ObjectMapper());
 
 
-    Assert.assertEquals("overrideMongoDb", config.getMongoDb());
-    Assert.assertEquals("defaultMongoUri", config.getMongoUri());
-    Assert.assertEquals("defaultMongoSession", config.getMongoSession().getCollection());
+    Assertions.assertEquals("overrideMongoDb", config.getMongoDb());
+    Assertions.assertEquals("defaultMongoUri", config.getMongoUri());
+    Assertions.assertEquals("defaultMongoSession", config.getMongoSession().getCollection());
 
   }
 }

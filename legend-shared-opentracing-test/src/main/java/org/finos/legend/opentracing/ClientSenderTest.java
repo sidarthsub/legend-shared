@@ -22,7 +22,7 @@ import java.util.List;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import zipkin2.Call;
 import zipkin2.Span;
 import zipkin2.Span.Kind;
@@ -73,17 +73,17 @@ public abstract class ClientSenderTest
         RecordedRequest request = mockWebServer.takeRequest();
         String cookie = request.getHeader("Cookie");
         List<HttpCookie> cookies = HttpCookie.parse(cookie);
-        Assert.assertEquals(1, cookies.size());
+        Assertions.assertEquals(1, cookies.size());
         HttpCookie httpCookie = cookies.get(0);
-        Assert.assertEquals("LegendSSO", httpCookie.getName());
-        Assert.assertEquals("testToken", httpCookie.getValue());
+        Assertions.assertEquals("LegendSSO", httpCookie.getName());
+        Assertions.assertEquals("testToken", httpCookie.getValue());
         byte[] sent = request.getBody().readByteArray();
         List<Span> results = SpanBytesDecoder.JSON_V2.decodeList(sent);
-        Assert.assertEquals(2, results.size());
+        Assertions.assertEquals(2, results.size());
         Span testSpan1 = results.get(0);
         Span testSpan2 = results.get(1);
-        Assert.assertEquals(span1, testSpan1);
-        Assert.assertEquals(span2, testSpan2);
+        Assertions.assertEquals(span1, testSpan1);
+        Assertions.assertEquals(span2, testSpan2);
 
       } finally
       {

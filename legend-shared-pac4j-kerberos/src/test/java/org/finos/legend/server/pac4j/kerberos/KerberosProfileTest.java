@@ -24,9 +24,9 @@ import de.bwaldvogel.mongo.backend.memory.MemoryBackend;
 import org.finos.legend.server.pac4j.mongostore.MongoDbSessionStore;
 import org.ietf.jgss.GSSCredential;
 import org.ietf.jgss.GSSException;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.context.JEEContext;
 import org.pac4j.core.context.session.JEESessionStore;
 import org.pac4j.core.util.Pac4jConstants;
@@ -45,10 +45,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -60,7 +60,7 @@ public class KerberosProfileTest
     private static MongoDatabase db;
     private static final String SESSION_COLLECTION = "sessionData";
 
-    @BeforeClass
+    @BeforeAll
     public static void setup()
     {
         server = new MongoServer(new MemoryBackend());
@@ -70,7 +70,7 @@ public class KerberosProfileTest
         db = client.getDatabase("test");
     }
 
-    @AfterClass
+    @AfterAll
     public static void teardown()
     {
         server.shutdown();

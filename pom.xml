@@ -65,7 +65,8 @@
         <jersey.client.version>2.23.2</jersey.client.version>
         <jersey.test.framework.version>2.23.1</jersey.test.framework.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
-        <junit.version>4.13.1</junit.version>
+        <!-- 5.10.x is the newest line compatible with dropwizard-testing 1.3.x junit5 extensions (ReflectionUtils.makeAccessible(AccessibleObject) removed in 5.11) -->
+        <junit.jupiter.version>5.10.5</junit.jupiter.version>
         <slf4j.version>1.7.36</slf4j.version>
         <mimeparse.version>0.1.3.3</mimeparse.version>
         <mockwebserver.version>4.9.0</mockwebserver.version>
@@ -574,9 +575,11 @@
 
             <!-- JUnit -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!-- JUnit -->
 
