@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.finos.legend.server.pac4j.SessionStoreTestUtil;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.context.JEEContext;
 import org.pac4j.core.context.session.JEESessionStore;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -37,7 +37,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import javax.servlet.http.Cookie;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MongoDbSessionStoreTest
 {
@@ -48,7 +48,7 @@ public class MongoDbSessionStoreTest
     private MongoDbSessionStore store;
     private static final String SESSION_COLLECTION = "sessionData";
 
-    @BeforeClass
+    @BeforeAll
     public static void setup()
     {
         server = new MongoServer(new MemoryBackend());
@@ -58,14 +58,14 @@ public class MongoDbSessionStoreTest
         db = client.getDatabase("test");
     }
 
-    @AfterClass
+    @AfterAll
     public static void teardown()
     {
         server.shutdown();
         client.close();
     }
 
-    @Before
+    @BeforeEach
     public void before()
     {
         List<String> testTrustedPackages = new ArrayList<>();

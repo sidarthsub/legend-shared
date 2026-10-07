@@ -16,8 +16,8 @@ package org.finos.legend.server.pac4j.kerberos;
 
 import com.sun.security.jgss.GSSUtil;
 import org.ietf.jgss.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.kerberos.credentials.KerberosCredentials;
@@ -27,7 +27,7 @@ import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosTicket;
 import java.util.Base64;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -43,7 +43,7 @@ public class ConstraintKerberosAuthenticatorTest
 {
     ConstraintKerberosAuthenticator delegationKerberosAuth;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         delegationKerberosAuth = spy(new ConstraintKerberosAuthenticator("service@REALM", "/test/service/keytab"));

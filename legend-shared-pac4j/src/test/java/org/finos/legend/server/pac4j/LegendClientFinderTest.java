@@ -15,7 +15,7 @@
 package org.finos.legend.server.pac4j;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.pac4j.core.client.Client;
 import org.pac4j.core.client.Clients;
@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.finos.legend.server.pac4j.LegendClientFinder.CLIENT_TO_EXCLUDE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

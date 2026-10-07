@@ -21,7 +21,7 @@ import io.dropwizard.Configuration;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletHandler;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.client.finder.ClientFinder;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.engine.DefaultSecurityLogic;
@@ -32,7 +32,7 @@ import org.pac4j.jee.filter.SecurityFilter;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LegendPac4JBundleTest
 {
@@ -67,7 +67,7 @@ public class LegendPac4JBundleTest
     assertEquals(Collections.singletonList("SecondTestClient"), ((LegendClientFinder)((DefaultSecurityLogic)builtConfig.getSecurityLogic()).getClientFinder()).getDefaultClients());
     assertEquals(config.getClients(), builtConfig.getClients().getClients());
     FilterHolder securityHolder = e.getApplicationContext().getServletHandler().getFilter(SecurityFilter.class.getName());
-    assertNotNull("Security filter holder cannot be null", securityHolder);
+    assertNotNull(securityHolder, "Security filter holder cannot be null");
     //initialize the filter so we can confirm swaps
     ServletHandler s =  new ServletHandler();
     s.addFilter(securityHolder);
@@ -96,7 +96,7 @@ public class LegendPac4JBundleTest
     assertEquals(Collections.singletonList("SecondTestClient"), ((LegendClientFinder)((DefaultSecurityLogic)builtConfig.getSecurityLogic()).getClientFinder()).getDefaultClients());
     assertEquals(config.getClients(), builtConfig.getClients().getClients());
     FilterHolder securityHolder = e.getApplicationContext().getServletHandler().getFilter(SecurityFilter.class.getName());
-    assertNotNull("Security filter holder cannot be null", securityHolder);
+    assertNotNull(securityHolder, "Security filter holder cannot be null");
     //initialize the filter so we can confirm swaps
     ServletHandler s =  new ServletHandler();
     s.addFilter(securityHolder);

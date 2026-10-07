@@ -17,8 +17,8 @@ package org.finos.legend.opentracing;
 import io.opentracing.contrib.jaxrs2.internal.SpanWrapper;
 import io.opentracing.mock.MockSpan;
 import io.opentracing.mock.MockTracer;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.io.IOException;
@@ -51,11 +51,11 @@ public class OpenTracingFilterTest
     OpenTracingFilter filter = new OpenTracingFilter(tracer);
     filter.doFilter(httpRequest, httpResponse, chain);
     verify(chain).doFilter(httpRequest, httpResponse);
-    Assert.assertEquals(1, tracer.finishedSpans().size());
+    Assertions.assertEquals(1, tracer.finishedSpans().size());
     MockSpan span = tracer.finishedSpans().get(0);
     ArgumentCaptor<SpanWrapper> spanCaptor = ArgumentCaptor.forClass(SpanWrapper.class);
     verify(httpRequest).setAttribute(eq(PROPERTY_NAME), spanCaptor.capture());
-    Assert.assertEquals(span, spanCaptor.getValue().get());
+    Assertions.assertEquals(span, spanCaptor.getValue().get());
   }
 
   @Test
@@ -81,14 +81,14 @@ public class OpenTracingFilterTest
     {
     }
     verify(chain).doFilter(httpRequest, httpResponse);
-    Assert.assertEquals(1, tracer.finishedSpans().size());
+    Assertions.assertEquals(1, tracer.finishedSpans().size());
     MockSpan span = tracer.finishedSpans().get(0);
     ArgumentCaptor<SpanWrapper> spanCaptor = ArgumentCaptor.forClass(SpanWrapper.class);
     verify(httpRequest).setAttribute(eq(PROPERTY_NAME), spanCaptor.capture());
-    Assert.assertEquals(span, spanCaptor.getValue().get());
-    Assert.assertEquals(Boolean.TRUE, span.tags().get("error"));
-    Assert.assertEquals(1, span.logEntries().size());
+    Assertions.assertEquals(span, spanCaptor.getValue().get());
+    Assertions.assertEquals(Boolean.TRUE, span.tags().get("error"));
+    Assertions.assertEquals(1, span.logEntries().size());
     MockSpan.LogEntry logEntry = span.logEntries().get(0);
-    Assert.assertEquals(exception, logEntry.fields().get("error.object"));
+    Assertions.assertEquals(exception, logEntry.fields().get("error.object"));
   }
 }

@@ -21,8 +21,8 @@ import org.ietf.jgss.GSSCredential;
 import org.ietf.jgss.GSSManager;
 import org.ietf.jgss.GSSName;
 import org.ietf.jgss.Oid;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.pac4j.core.context.JEEContext;
 import org.pac4j.core.context.WebContext;
@@ -34,10 +34,10 @@ import javax.security.auth.kerberos.KerberosTicket;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -51,7 +51,7 @@ public class UnconstraintKerberosAuthenticatorTest
 {
     UnconstraintKerberosAuthenticator delegationKerberosAuth;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         delegationKerberosAuth = new UnconstraintKerberosAuthenticator("service@REALM", "/test/service/keytab", "https://test.service.com");
