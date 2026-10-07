@@ -16,7 +16,7 @@ package org.finos.legend.opentracing;
 
 import java.io.IOException;
 import java.net.URI;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import zipkin2.reporter.Sender;
 
 public class JerseyClientSenderTest extends ClientSenderTest

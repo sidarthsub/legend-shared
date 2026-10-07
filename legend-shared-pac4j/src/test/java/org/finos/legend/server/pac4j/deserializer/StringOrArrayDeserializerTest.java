@@ -17,11 +17,11 @@ package org.finos.legend.server.pac4j.deserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.finos.legend.server.pac4j.LegendClientFinder;
 import org.finos.legend.server.pac4j.LegendPac4jConfiguration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringOrArrayDeserializerTest
 {
