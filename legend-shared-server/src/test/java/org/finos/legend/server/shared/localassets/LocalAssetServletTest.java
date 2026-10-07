@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.HttpHeaders;
 import org.glassfish.grizzly.servlet.WebappContext;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 public class LocalAssetServletTest
@@ -44,7 +44,7 @@ public class LocalAssetServletTest
     servlet.doGet(request, response);
     ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
     verify(response).addHeader(eq(HttpHeaders.CACHE_CONTROL), captor.capture());
-    Assert.assertEquals("no-cache, no-transform, must-revalidate", captor.getValue());
+    Assertions.assertEquals("no-cache, no-transform, must-revalidate", captor.getValue());
   }
 
 

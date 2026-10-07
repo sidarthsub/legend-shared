@@ -41,8 +41,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <maven.compiler.release>8</maven.compiler.release>
-        <java.version.range>[11,12),[17,18),[21,22),[25,26)</java.version.range>
+        <maven.compiler.release>17</maven.compiler.release>
+        <java.version.range>[17,18),[21,22),[25,26)</java.version.range>
         <publish.server.id>central</publish.server.id>
 
         <!-- Dependencies -->
@@ -63,7 +63,8 @@
         <jersey.client.version>2.23.2</jersey.client.version>
         <jersey.test.framework.version>2.23.1</jersey.test.framework.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
-        <junit.version>4.13.1</junit.version>
+        <!-- 5.11+ changed ReflectionUtils.makeAccessible, which breaks Dropwizard 1.3 DropwizardExtensionsSupport -->
+        <junit.jupiter.version>5.10.5</junit.jupiter.version>
         <slf4j.version>1.7.36</slf4j.version>
         <mimeparse.version>0.1.3.3</mimeparse.version>
         <mockwebserver.version>4.9.0</mockwebserver.version>
@@ -87,9 +88,9 @@
         <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
         <maven.checkstyle.plugin>3.1.0</maven.checkstyle.plugin>
         <checkstyle.version>8.29</checkstyle.version>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
         <maven.source.plugin.version>3.2.0</maven.source.plugin.version>
-        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
         <maven.dependency.plugin.version>2.10</maven.dependency.plugin.version>
         <maven.shade.plugin.version>3.2.1</maven.shade.plugin.version>
         <maven.plugin.plugin.version>3.6.0</maven.plugin.plugin.version>
@@ -131,7 +132,7 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven.javadoc.plugin.version}</version>
                     <configuration>
-                        <source>8</source>
+                        <source>${maven.compiler.release}</source>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -572,9 +573,11 @@
 
             <!-- JUnit -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!-- JUnit -->
 

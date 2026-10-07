@@ -14,14 +14,14 @@
 
 package org.finos.legend.server.pac4j;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.client.Client;
 import org.pac4j.core.context.JEEContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LegendUserProfileStorageDecisionTest
 {

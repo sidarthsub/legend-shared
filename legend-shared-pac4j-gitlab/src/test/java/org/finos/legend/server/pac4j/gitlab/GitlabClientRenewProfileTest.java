@@ -18,9 +18,9 @@ import com.nimbusds.oauth2.sdk.token.BearerAccessToken;
 import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.core.exception.TechnicalException;
@@ -33,12 +33,12 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -49,7 +49,7 @@ public class GitlabClientRenewProfileTest
     private MockWebServer mockServer;
     private String discoveryUrl;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException
     {
         mockServer = new MockWebServer();
@@ -57,7 +57,7 @@ public class GitlabClientRenewProfileTest
         discoveryUrl = mockServer.url("/.well-known/openid-configuration").toString();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws IOException
     {
         mockServer.shutdown();
@@ -72,8 +72,8 @@ public class GitlabClientRenewProfileTest
         client.setDiscoveryUri(discoveryUrl);
         client.setCallbackUrl("http://localhost:8080/callback");
 
-        assertNull("Configuration should be null before init() is called",
-                client.getConfiguration());
+        assertNull(
+                client.getConfiguration(), "Configuration should be null before init() is called");
 
         mockServer.enqueue(createDiscoveryResponse());
         mockServer.enqueue(createTokenErrorResponse());
@@ -83,10 +83,10 @@ public class GitlabClientRenewProfileTest
 
         TechnicalException e = assertThrows(TechnicalException.class,
                 () -> client.renewUserProfile(expiredProfile, mockContext));
-        assertFalse("init() was not called before accessing getConfiguration()",
-                e.getMessage().contains("configuration cannot be null"));
-        assertNotNull("Configuration should be non-null after renewUserProfile() triggers init()",
-                client.getConfiguration());
+        assertFalse(
+                e.getMessage().contains("configuration cannot be null"), "init() was not called before accessing getConfiguration()");
+        assertNotNull(
+                client.getConfiguration(), "Configuration should be non-null after renewUserProfile() triggers init()");
     }
 
     @Test
@@ -101,7 +101,7 @@ public class GitlabClientRenewProfileTest
         mockServer.enqueue(createDiscoveryResponse());
         client.init();
 
-        assertNotNull("Configuration should be set after init()", client.getConfiguration());
+        assertNotNull(client.getConfiguration(), "Configuration should be set after init()");
 
         mockServer.enqueue(createTokenErrorResponse());
 
@@ -110,9 +110,9 @@ public class GitlabClientRenewProfileTest
 
         TechnicalException e = assertThrows(TechnicalException.class,
                 () -> client.renewUserProfile(expiredProfile, mockContext));
-        assertFalse("Should not get 'configuration cannot be null' on an initialized client",
-                e.getMessage().contains("configuration cannot be null"));
-        assertNotNull("Configuration should still be non-null", client.getConfiguration());
+        assertFalse(
+                e.getMessage().contains("configuration cannot be null"), "Should not get 'configuration cannot be null' on an initialized client");
+        assertNotNull(client.getConfiguration(), "Configuration should still be non-null");
     }
 
     @Test
@@ -149,7 +149,7 @@ public class GitlabClientRenewProfileTest
 
         Optional<UserProfile> result = client.renewUserProfile(expiredProfile, mockContext);
 
-        assertTrue("Should return the renewed profile from session", result.isPresent());
+        assertTrue(result.isPresent(), "Should return the renewed profile from session");
         assertEquals("new-access-token", ((OidcProfile) result.get()).getAccessToken().getValue());
     }
 
@@ -179,8 +179,8 @@ public class GitlabClientRenewProfileTest
 
         TechnicalException e = assertThrows(TechnicalException.class,
                 () -> client.renewUserProfile(expiredProfile, mockContext));
-        assertTrue("Should be invalid_grant error",
-                e.getMessage().contains("invalid_grant"));
+        assertTrue(
+                e.getMessage().contains("invalid_grant"), "Should be invalid_grant error");
     }
 
     private OidcProfile createExpiredProfile()

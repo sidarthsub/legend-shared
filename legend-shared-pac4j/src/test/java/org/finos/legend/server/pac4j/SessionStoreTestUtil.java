@@ -22,9 +22,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import javax.servlet.http.Cookie;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SessionStoreTestUtil {
 
@@ -39,7 +39,7 @@ public class SessionStoreTestUtil {
         assertEquals("LegendSSOTest", cookie.getName());
         String val = cookie.getValue();
         Pattern acceptable = Pattern.compile("[0-9a-f]{15,16}-[0-9a-f]{15,16}/[0-9a-f]{15,16}-[0-9a-f]{15,16}");
-        assertTrue("testing " + val, acceptable.matcher(val).matches());
+        assertTrue(acceptable.matcher(val).matches(), "testing " + val);
     }
 
     public static void testMultipleSetsOnlyCreateOneCookie(HttpSessionStore store)
